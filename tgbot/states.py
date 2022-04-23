@@ -10,8 +10,19 @@ class DetectState(StatesGroup):
     waiting_for_method = State()
     waiting_for_photo = State()
 
-    
+
 class RecognizeState(StatesGroup):
     waiting_for_method = State()
     waiting_for_photo = State()
 
+
+class CorrectState(StatesGroup):
+    waiting_for_photo = State()
+
+
+class ClusterState(StatesGroup):
+    waiting_for_photo = State()
+
+
+class ControlState(StatesGroup):
+    pass

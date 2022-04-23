@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
+from aiogram.types import ReplyKeyboardMarkup
 
 
 # Main keyboard
@@ -20,4 +20,3 @@ def get_more_kb(my_btn: str) -> ReplyKeyboardMarkup:
         my_btn,
         "↪️ Меню"
     ])
-

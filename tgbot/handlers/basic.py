@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 from aiogram import Dispatcher
-from aiogram.types import Message
 from aiogram.dispatcher import FSMContext
-
 from aiogram.dispatcher.filters.builtin import CommandStart, CommandHelp, Text
+from aiogram.types import Message
 
 from tgbot.keyboards import get_start_kb
 
-
-available_buttons = ["🔳 Обнаружение", "👤 Распознавание", "🪄 Коррекция", "📊 Кластеризация", "⚙️ Управление", "🔬 Обучение"]
+available_buttons = ["🔳 Обнаружение", "👤 Распознавание", "🪄 Коррекция", "📊 Кластеризация", "⚙️ Управление",
+                     "🔬 Обучение"]
 
 
 # Start command

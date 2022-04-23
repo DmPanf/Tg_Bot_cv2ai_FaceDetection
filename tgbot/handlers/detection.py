@@ -1,8 +1,7 @@
 from aiogram import Dispatcher
-from aiogram.types import Message, ContentTypes
 from aiogram.dispatcher import FSMContext
-
 from aiogram.dispatcher.filters.builtin import Text
+from aiogram.types import Message, ContentTypes
 from aiogram.utils.markdown import hcode
 
 from tgbot.keyboards import get_method_kb, get_more_kb
@@ -42,4 +41,3 @@ def register_detection(dp: Dispatcher):
     dp.register_message_handler(detection_method_chosen, state=DetectState.waiting_for_method)
     dp.register_message_handler(detection_photo_attached, content_types=ContentTypes.ANY,
                                 state=DetectState.waiting_for_photo)
-
