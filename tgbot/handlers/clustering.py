@@ -23,7 +23,7 @@ async def correction_photo_attached(msg: Message, state: FSMContext):
     await state.finish()
 
 
-def register_detection(dp: Dispatcher):
+def register_clustering(dp: Dispatcher):
     dp.register_message_handler(btn_correction, Text(equals="📊 Кластеризация"), state="*")
     dp.register_message_handler(correction_photo_attached, content_types=ContentTypes.ANY,
                                 state=ClusterState.waiting_for_photo)
