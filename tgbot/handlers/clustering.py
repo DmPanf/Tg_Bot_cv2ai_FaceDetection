@@ -5,12 +5,12 @@ from aiogram.dispatcher.filters.builtin import Text
 from aiogram.types import Message, ContentTypes
 from aiogram.utils.markdown import hcode
 
-from tgbot.keyboards import get_more_kb
+from tgbot.keyboards import get_more_kb, go_menu_keyboard
 from tgbot.states import ClusterState
 
 
 async def btn_correction(msg: Message):
-    await msg.answer("🖼‍ Прикрепите фотографию для кластеризации")
+    await msg.answer("🖼‍ Прикрепите фотографию для кластеризации", reply_markup=go_menu_keyboard())
     await ClusterState.waiting_for_photo.set()
 
 

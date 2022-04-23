@@ -21,7 +21,7 @@ async def cmd_start(msg: Message, state: FSMContext):
 # Cancel command
 async def cmd_cancel(msg: Message, state: FSMContext):
     await state.finish()
-    await msg.answer("Действие отменено", reply_markup=get_start_kb())
+    await msg.answer("Действие отменено", reply_markup=get_start_kb(available_buttons))
 
 
 # Main menu

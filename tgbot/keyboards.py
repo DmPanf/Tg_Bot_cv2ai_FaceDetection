@@ -20,3 +20,7 @@ def get_more_kb(my_btn: str) -> ReplyKeyboardMarkup:
         my_btn,
         "↪️ Меню"
     ])
+
+
+def go_menu_keyboard() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(resize_keyboard=True).add("↪️ Меню")
