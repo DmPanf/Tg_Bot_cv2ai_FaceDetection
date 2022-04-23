@@ -6,7 +6,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import Text
 from aiogram.utils.markdown import hcode
 
-from tgbot.keyboards import get_method_kb, get_detect_more_kb
+from tgbot.keyboards import get_method_kb, get_more_kb
 from tgbot.states import RecognizeState
 
 available_methods = ["HAAR", "CNN"]
@@ -27,20 +27,20 @@ async def recognition_method_chosen(msg: Message, state: FSMContext):
     await msg.answer("🖼 Теперь прикрепите фотографию")
 
 
-async def detection_photo_attached(msg: Message, state: FSMContext):
+async def recognition_photo_attached(msg: Message, state: FSMContext):
     if not msg.photo:
         await msg.answer("⚠️ Пожалуйста, прикрепите фотографию.")
         return
     user_data = await state.get_data()
-    await msg.answer(f"Метод обнаружения: {hcode(user_data['chosen_method'])}\n"
+    await msg.answer(f"Метод распознавания: {hcode(user_data['chosen_method'])}\n"
                      f"Фотография: {hcode(msg.photo[-1].file_id)}",
-                     reply_markup=get_detect_more_kb())
+                     reply_markup=get_more_kb("👤 Распознавание"))
     await state.finish()
 
 
 def register_recognition(dp: Dispatcher):
     dp.register_message_handler(btn_recognition, Text(equals="👤 Распознавание"), state="*")
     dp.register_message_handler(recognition_method_chosen, state=RecognizeState.waiting_for_method)
-    dp.register_message_handler(detection_photo_attached, content_types=ContentTypes.ANY,
+    dp.register_message_handler(recognition_photo_attached, content_types=ContentTypes.ANY,
                                 state=RecognizeState.waiting_for_photo)
 

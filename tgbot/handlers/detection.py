@@ -5,7 +5,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import Text
 from aiogram.utils.markdown import hcode
 
-from tgbot.keyboards import get_method_kb, get_detect_more_kb
+from tgbot.keyboards import get_method_kb, get_more_kb
 from tgbot.states import DetectState
 
 available_methods = ["Сравнение", "HAAR", "HoG", "DNN", "CNN", "MTCNN", "SiAm"]
@@ -33,7 +33,7 @@ async def detection_photo_attached(msg: Message, state: FSMContext):
     user_data = await state.get_data()
     await msg.answer(f"Метод обнаружения: {hcode(user_data['chosen_method'])}\n"
                      f"Фотография: {hcode(msg.photo[-1].file_id)}",
-                     reply_markup=get_detect_more_kb())
+                     reply_markup=get_more_kb("🔳 Обнаружение"))
     await state.finish()
 
 

@@ -14,11 +14,10 @@ def get_method_kb(buttons: list) -> ReplyKeyboardMarkup:
     return detect_kb.add(*buttons, "↪️ Меню")
 
 
-# TODO сделать метод универсальным
-def get_detect_more_kb() -> ReplyKeyboardMarkup:
+def get_more_kb(my_btn: str) -> ReplyKeyboardMarkup:
     detect_more_kb = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     return detect_more_kb.add(*[
-        "🔳 Обнаружение",
+        my_btn,
         "↪️ Меню"
     ])
 
