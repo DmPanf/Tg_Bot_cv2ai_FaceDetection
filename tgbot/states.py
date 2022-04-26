@@ -1,27 +1,10 @@
 # -*- coding: utf-8 -*-
 from aiogram.dispatcher.filters.state import StatesGroup, State
+from aiogram.dispatcher import FSMContext
 
 
-class TestState(StatesGroup):
-    location = State()
-
-
-class DetectState(StatesGroup):
+class PhotoState(StatesGroup):
     waiting_for_method = State()
-    waiting_for_photo = State()
-
-
-class RecognizeState(StatesGroup):
-    waiting_for_method = State()
-    waiting_for_photo = State()
-
-
-class CorrectState(StatesGroup):
-    waiting_for_photo = State()
-
-
-class ClusterState(StatesGroup):
-    waiting_for_photo = State()
 
 
 class ControlState(StatesGroup):

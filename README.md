@@ -8,16 +8,6 @@ sudo apt install -y redis
 sudo systemctl enable redis-server --now
 ```
 
-## Install supervisor
-
-```bash
-sudo apt install -y supervisor
-```
-
-```bash
-sudo systemctl enable supervisor --now
-```
-
 ## Install poetry
 
 ```bash
@@ -40,13 +30,13 @@ cd $HOME/Documents/{PROJECT_NAME}
 poetry install --no-dev
 ```
 
+```bash
+poetry env use system
+```
+
 ## Edit env
 
 ```bash
 mv .env.dist .env ; \
 nano .env
 ```
-
-## Run project
-
-Supervisor will keep the project running

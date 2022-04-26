@@ -20,7 +20,6 @@ async def set_bot_commands(dp):
         [
             BotCommand("start", "Перезапустить бота"),
             BotCommand("help", "Вывести справку"),
-            BotCommand("menu", "Открыть меню"),
             BotCommand("cancel", "Отменить действие"),
         ]
     )
