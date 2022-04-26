@@ -32,7 +32,7 @@ async def cmd_help(msg: Message):
 #
 async def photo_handler(msg: Message, state: FSMContext):
     await state.set_state(PhotoState.waiting_for_method)
-    await state.update_data(photo_file_id=msg.photo[-1].file_id)
+    await state.update_data(photo_file_id=msg.photo[-1].file_unique_id)
     await msg.reply("Test", reply_markup=get_start_kb(available_buttons))
 
 

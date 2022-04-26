@@ -26,4 +26,4 @@ async def new_method_chosen(msg: Message, state: FSMContext):
 
 
 def register_new_level(dp: Dispatcher):
-    dp.register_message_handler(new_method_chosen, state=PhotoState)
+    dp.register_message_handler(new_method_chosen, state=PhotoState.waiting_for_method)

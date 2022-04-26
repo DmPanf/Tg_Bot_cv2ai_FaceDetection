@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from aiogram.types import ReplyKeyboardMarkup
+from aiogram.types import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 
 
 # Main keyboard
@@ -14,13 +14,16 @@ def get_method_kb(buttons: list) -> ReplyKeyboardMarkup:
     return detect_kb.add(*buttons, "↪️ Меню")
 
 
-def get_more_kb(my_btn: str) -> ReplyKeyboardMarkup:
-    detect_more_kb = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-    return detect_more_kb.add(*[
-        my_btn,
-        "↪️ Меню"
-    ])
-
-
-def go_menu_keyboard() -> ReplyKeyboardMarkup:
-    return ReplyKeyboardMarkup(resize_keyboard=True).add("↪️ Меню")
+def get_control_kb() -> InlineKeyboardMarkup:
+    control_kb = InlineKeyboardMarkup(row_width=2)
+    btns = [
+        InlineKeyboardButton("🛠 Администрирование", callback_data="control:admin"),
+        InlineKeyboardButton("📈 Статистика", callback_data="control:stat"),
+        InlineKeyboardButton("🎛 Датчики", callback_data="control:sensors"),
+        InlineKeyboardButton("💾 Фото-архив", callback_data="control:photo_archive"),
+        InlineKeyboardButton("🚪 Дверь", callback_data="control:door"),
+        InlineKeyboardButton("🪟 Жалюзи", callback_data="control:window"),
+    ]
+    control_kb.add(*btns)
+    control_kb.row(InlineKeyboardButton("📂 Код бота", url="https://github.com/dnp34/cv2ai"))
+    return control_kb
