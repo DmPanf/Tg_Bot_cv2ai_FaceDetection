@@ -1,0 +1,120 @@
+*.env
+*.venv
+venv/
+*.lock
+**/Model/
+**/IMG/
+**/Log/
+!**/input_img.py
+!**/train_model.py
+=======
+**/Cascades/
+# Byte-compiled / optimized / DLL files
+**/__pycache__
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+bin/
+build/
+*.egg-info/
+.installed.cfg
+**/downloads/
+**/node_modules/
+**/.DS_Store
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Local files
+*.aux
+*.rdb
+*.pid
+*.toc
+*.out
+*.tmp
+*.lock
+*.pickle
+
+# Data base
+*.db
+db.sqlite3
+db.sqlite3-journal
+
+# Logs
+*.log
+**/logs/
+*-logs.json
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Stuff:
+.idea/
+instance/
+docs/_build/
+.idea_modules/
+.ipynb_checkpoints
+celeryst-schedule
+
+# Unit test / coverage reports
+.tox/
+.cache
+.coverage
+coverage.xml
+nosetests.xml
+htmlcov/
+.nox/
+.coverage.*
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Envs & settings
+*.env
+!*.dist
+*.venv
+env/
+ENV/
+venv/
+*.conf
+*-config.json
+*-config.py
+!config.py
+local_settings.py
+
+# Visual Studio Code #
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+
+# Sublime Text #
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
