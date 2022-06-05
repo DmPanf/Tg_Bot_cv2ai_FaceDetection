@@ -21,5 +21,12 @@ async def set_bot_commands(dp):
             BotCommand("start", "Перезапустить бота"),
             BotCommand("help", "Вывести справку"),
             BotCommand("cancel", "Отменить действие"),
+            BotCommand("photo", "Повторить текущее фото"),
         ]
     )
+
+"""
+# Делаем отправку инфо в Телеграм
+async def send_info(dp):
+    await dp.bot.send_message(chat.id=dp.bot.config.tg_bot.ADMINS[0])
+"""

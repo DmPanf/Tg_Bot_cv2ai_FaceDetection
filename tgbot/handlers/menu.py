@@ -12,7 +12,14 @@ from tgbot.states import PhotoState
 
 from tgbot.handlers.new_lvl_menu import available_recognition_methods
 from tgbot.handlers.new_lvl_menu import available_detection_methods
+from tgbot.handlers.new_lvl_menu import available_avatars_methods
+from tgbot.handlers.new_lvl_menu import available_cluster_methods
+from tgbot.handlers.new_lvl_menu import available_correction_methods
 
+
+async def orig_photo(msg: Message, state: FSMContext):
+    user_data = await state.get_data()
+    await msg.answer_photo(photo=user_data['photo_file_id'])
 
 async def btn_training(msg: Message):
     await msg.reply("😶‍🌫️ функция в разработке!")
@@ -33,14 +40,19 @@ async def btn_detection(msg: Message):
                      reply_markup=get_method_kb(available_detection_methods))
 
 
+async def avatars(msg: Message):
+    await msg.answer("👓 Выберите способ аватарки:",
+                     reply_markup=get_method_kb(available_avatars_methods))
+
+
 async def btn_correction(msg: Message, state: FSMContext):
-    user_data = await state.get_data()
-    await msg.answer(f"{user_data['photo_file_id']}")
+    await msg.answer("🎎 Выберите способ коррекции:",
+                     reply_markup=get_method_kb(available_correction_methods))
 
 
 async def btn_clustering(msg: Message, state: FSMContext):
-    user_data = await state.get_data()
-    await msg.answer(f"{user_data['photo_file_id']}")
+    await msg.answer("🧮 Выберите способ кластеризации:",
+                     reply_markup=get_method_kb(available_cluster_methods))
 
 
 async def cb_response(call: CallbackQuery):
@@ -53,11 +65,13 @@ async def cb_response(call: CallbackQuery):
 
 
 def register_menu(dp: Dispatcher):
+    dp.register_message_handler(orig_photo, commands="photo", state=PhotoState)
     dp.register_message_handler(btn_recognition, Text(equals="👤 Распознавание"), state=PhotoState)
     dp.register_message_handler(btn_detection, Text(equals="🔳 Обнаружение"), state=PhotoState)
     dp.register_message_handler(btn_correction, Text(equals="🪄 Коррекция"), state=PhotoState.waiting_for_method)
+    dp.register_message_handler(avatars, Text(equals="🪞 Аватар"), state=PhotoState)
     dp.register_message_handler(btn_clustering, Text(equals="📊 Кластеризация"), state=PhotoState.waiting_for_method)
     dp.register_message_handler(btn_training, Text(equals="🔬 Обучение"), state=PhotoState)
-    dp.register_message_handler(btn_control, Text(equals="⚙️ Управление"), state=PhotoState)
+    dp.register_message_handler(btn_control, Text(equals="⚙️ Управление (IoT)"), state=PhotoState)
 
     dp.register_callback_query_handler(cb_response, state="*")

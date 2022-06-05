@@ -7,8 +7,10 @@ from aiogram.types import Message, ContentTypes, ReplyKeyboardRemove
 from tgbot.keyboards import get_start_kb
 from tgbot.states import PhotoState
 
-available_buttons = ["🔳 Обнаружение", "👤 Распознавание", "🪄 Коррекция", "📊 Кластеризация", "⚙️ Управление",
-                     "🔬 Обучение"]
+available_buttons = ["🔳 Обнаружение", "👤 Распознавание",
+                     "📊 Кластеризация", "🔬 Обучение",
+                     "🪄 Коррекция","🪞 Аватар",
+                     "⚙️ Управление (IoT)"]
 
 
 # Start command
@@ -32,8 +34,8 @@ async def cmd_help(msg: Message):
 #
 async def photo_handler(msg: Message, state: FSMContext):
     await state.set_state(PhotoState.waiting_for_method)
-    await state.update_data(photo_file_id=msg.photo[-1].file_unique_id)
-    await msg.reply("Test", reply_markup=get_start_kb(available_buttons))
+    await state.update_data(photo_file_id=msg.photo[-1].file_id)
+    await msg.reply("Какой метод использовать?", reply_markup=get_start_kb(available_buttons))
 
 
 def register_basic(dp: Dispatcher):
