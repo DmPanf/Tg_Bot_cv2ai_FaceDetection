@@ -28,24 +28,34 @@ def kmeans_method(in_img, out_img):
     image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     mod_img = cv2.resize(image, (600, 400), interpolation = cv2.INTER_AREA) # Reduce image size to reduce the execution time
     mod_img = mod_img.reshape(mod_img.shape[0]*mod_img.shape[1], 3) # Reduce the input to two dimensions for KMeans
-
-    N = 12
+#    print(mod_img.shape)
+    N = 15
     sse = {}
     for k in range(2, N):
         clf = KMeans(n_clusters=k, max_iter=100).fit(mod_img)
+#        label = clf.labels_
+#        print(label)
+#        clf = KMeans(n_clusters=k).fit(mod_img)
+#        print(k, ' - ', clf, ' = ', clf.inertia_)
         sse[k] = clf.inertia_ # Inertia: Sum of distances of samples to yheir closes cluster center
-#    kl = KneeLocator(range(2, N), clf, S=0.1, curve='convex', direction='decreasing')
+#    print(sse)
+#    kl = KneeLocator(range(1,N), sse, S=0.1, curve='convex', direction='decreasing')
+    kn = KneeLocator(x=list(sse.keys()), y=list(sse.values()), curve='convex', direction='decreasing')
+    K = kn.knee # + 1
+    print('\nОптимальное количество кластеров: ', K)
 #    print('\nОптимальное количество кластеров: ', kl.elbow, '\n')
 #    kl = silhouette_score(sse, clf.labels_)
 #    print('\nОптимальное количество кластеров: ', kl, '\n')
 
     plt.figure(figsize=(8,5), dpi=100)
 #    plt.plot(K, avgWithinSS, 'b*-')
-    plt.plot(list(sse.keys()), list(sse.values()), 'b*-')
+    plt.plot(list(sse.keys()), list(sse.values()), 'b*-', linewidth=2)
     plt.grid(True)
+    plt.axvline(x=K, linestyle='--', color='darkred', linewidth=2)
+    plt.plot(K, sse[K],'ro') # Выделить точку с оптимальным числом Кластеров
     plt.xlabel('Number of clusters')
     plt.ylabel('Average within-cluster sum of squares')
-    plt.title('Elbow for KMeans clustering (Оптимальное кол-во кластеров)')
+    plt.title(f'Elbow for KMeans clustering (Оптимальное кол-во кластеров: {K})')
     plt.savefig('opt.jpg', bbox_inches='tight')
     plt.close('all')
 
@@ -235,11 +245,21 @@ def optimal_method(in_img, out_img):
     nparr = np.fromstring(in_img.getvalue(), np.uint8)
     image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    image = cv2.resize(image, (600, 400), interpolation = cv2.INTER_AREA) # Reduce image size to reduce the execution time
     image = image.reshape((image.shape[0] * image.shape[1], 3)) # reshape the image to be a list of pixels
 
-    N = 5
-    clt = KMeans(n_clusters=N) # cluster the pixel intensities
-    clt.fit(image)
+    N = 15 # Вычисляем оптимальное число Кластеров
+    sse = {}
+    for k in range(2, N):
+#        clf = KMeans(n_clusters=k, max_iter=100).fit(image)
+        clf = KMeans(n_clusters=k).fit(image)
+        sse[k] = clf.inertia_ # Inertia: Sum of distances of samples to yheir closes cluster center
+    kn = KneeLocator(x=list(sse.keys()), y=list(sse.values()), curve='convex', direction='decreasing')
+    K = kn.knee # + 1
+    print('\nОптимальное количество кластеров: ', K)
+#    N = K # Строим цветовую гамму оптимальным образом
+    clt = KMeans(n_clusters=K).fit(image) # cluster the pixel intensities
+#    clt.fit(image)
     hist = centroid_histogram(clt) # build a histogram of clusters and then create a figure representing the number of pixels labeled to each color
     bar = plot_colors(hist, clt.cluster_centers_)
 
